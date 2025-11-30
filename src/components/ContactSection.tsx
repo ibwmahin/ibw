@@ -1,8 +1,10 @@
 /**
  * ContactSection Component
  * 
- * Final section with "Obrigado!" message and social media links.
+ * Final section with "Thank You!" message and social media links.
  * Features animated entrance and hover effects.
+ * 
+ * @author Abdulla Al Mahin (@ibwmahin)
  */
 
 import { useEffect, useRef } from "react";
@@ -10,58 +12,107 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram, faTwitter, faBehance, faYoutube, faLinkedin, faTiktok } from "@fortawesome/free-brands-svg-icons";
+import { 
+  faInstagram, 
+  faTwitter, 
+  faYoutube, 
+  faLinkedin, 
+  faTiktok,
+  faFacebook,
+  faGithub
+} from "@fortawesome/free-brands-svg-icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Social media links data
+ * Social media links data - All @ibwmahin
  */
 const socialLinks = [
   {
     icon: faEnvelope,
-    label: "faayzeffects12@gmail.com",
-    href: "mailto:faayzeffects12@gmail.com",
+    label: "ibwmahin@gmail.com",
+    href: "mailto:ibwmahin@gmail.com",
   },
   {
     icon: faInstagram,
-    label: "faayz.edit",
-    href: "https://instagram.com/faayz.edit",
+    label: "@ibwmahin",
+    href: "https://instagram.com/ibwmahin",
   },
   {
     icon: faTwitter,
-    label: "faayzeddit",
-    href: "https://twitter.com/faayzeddit",
+    label: "@ibwmahin",
+    href: "https://twitter.com/ibwmahin",
   },
 ];
 
 /**
- * Portfolio links
+ * Portfolio/Social links
  */
 const portfolioLinks = [
-  { icon: faBehance, href: "#", label: "Behance" },
-  { icon: faYoutube, href: "#", label: "YouTube" },
-  { icon: faLinkedin, href: "#", label: "LinkedIn" },
-  { icon: faTiktok, href: "#", label: "TikTok" },
+  { icon: faYoutube, href: "https://youtube.com/@ibwmahin", label: "YouTube" },
+  { icon: faLinkedin, href: "https://linkedin.com/in/ibwmahin", label: "LinkedIn" },
+  { icon: faTiktok, href: "https://tiktok.com/@ibwmahin", label: "TikTok" },
+  { icon: faFacebook, href: "https://facebook.com/ibwmahin", label: "Facebook" },
+  { icon: faGithub, href: "https://github.com/ibwmahin", label: "GitHub" },
 ];
 
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Title animation with bounce
       gsap.fromTo(
-        contentRef.current?.children || [],
+        titleRef.current,
+        { y: 100, opacity: 0, scale: 0.5 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: "elastic.out(1, 0.5)",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 85%",
+          },
+        }
+      );
+
+      // Content stagger animation
+      const contentElements = contentRef.current?.children || [];
+      gsap.fromTo(
+        contentElements,
         { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.8,
           stagger: 0.1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: contentRef.current,
             start: "top 80%",
+          },
+        }
+      );
+
+      // Links animation with scale
+      const linkElements = linksRef.current?.children || [];
+      gsap.fromTo(
+        linkElements,
+        { scale: 0, rotation: -180 },
+        {
+          scale: 1,
+          rotation: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: linksRef.current,
+            start: "top 85%",
           },
         }
       );
@@ -77,34 +128,37 @@ const ContactSection = () => {
       className="relative py-32 overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-background grid-pattern" />
       <div className="absolute inset-0 red-glow-bottom" />
+      <div className="absolute inset-0 red-glow-center opacity-30" />
 
       <div className="container relative z-10">
         <div ref={contentRef} className="text-center space-y-8">
           {/* Main Title */}
-          <h2 className="font-heading text-7xl md:text-9xl lg:text-[10rem] font-bold text-foreground tracking-tight">
-            Obrigado!
+          <h2 
+            ref={titleRef}
+            className="font-heading text-7xl md:text-9xl lg:text-[10rem] font-bold text-foreground tracking-tight glow-text"
+          >
+            Thank You!
           </h2>
 
           {/* Subtitle */}
           <p className="text-muted-foreground text-xl md:text-2xl">
-            Thank you!
+            Let's work together
           </p>
 
           {/* Contact Links */}
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12 pt-8">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10 pt-8">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-all duration-300 group magnetic-hover"
                 target={link.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
               >
                 <FontAwesomeIcon
-                  icon={link.icon as any}
-                  className="text-xl text-primary group-hover:scale-110 transition-transform duration-300"
+                  icon={link.icon}
+                  className="text-xl text-primary group-hover:scale-125 transition-transform duration-300"
                 />
                 <span className="font-body text-sm md:text-base">
                   {link.label}
@@ -114,33 +168,47 @@ const ContactSection = () => {
           </div>
 
           {/* Portfolio Links */}
-          <div className="flex justify-center gap-4 pt-8">
+          <div ref={linksRef} className="flex justify-center gap-4 pt-8">
             {portfolioLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-muted hover:bg-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300"
+                className="w-12 h-12 flex items-center justify-center rounded-full bg-muted/50 hover:bg-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300 border border-border/50 hover:border-primary magnetic-hover"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
               >
-                <FontAwesomeIcon icon={link.icon as any} />
+                <FontAwesomeIcon icon={link.icon} className="text-lg" />
               </a>
             ))}
           </div>
 
+          {/* CTA Button */}
+          <div className="pt-8">
+            <a
+              href="mailto:ibwmahin@gmail.com"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 magnetic-hover border-glow"
+            >
+              <FontAwesomeIcon icon={faEnvelope} />
+              <span>Get In Touch</span>
+            </a>
+          </div>
+
           {/* Footer */}
-          <div className="pt-16 border-t border-border mt-16">
+          <div className="pt-16 border-t border-border/50 mt-16">
             <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-              <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-                <span className="font-heading font-bold text-primary-foreground text-xs">
-                  RC
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center pulse-ring">
+                <span className="font-heading font-bold text-primary-foreground text-sm">
+                  AM
                 </span>
               </div>
-              <span>Edição de Vídeo | Portfólio</span>
+              <span>Abdulla Al Mahin | Video Editor</span>
             </div>
             <p className="text-muted-foreground/60 text-xs mt-4">
-              © 2024 Rafael Costa. Todos os direitos reservados.
+              © {new Date().getFullYear()} Abdulla Al Mahin (@ibwmahin). All rights reserved.
+            </p>
+            <p className="text-muted-foreground/40 text-xs mt-2">
+              Based in Bangladesh 🇧🇩
             </p>
           </div>
         </div>

@@ -10,6 +10,8 @@ import type { Config } from "tailwindcss";
  * - Inter for body text
  * - Red accent with glow effects
  * - Custom animations for GSAP integration
+ * 
+ * @author Abdulla Al Mahin (@ibwmahin)
  */
 
 export default {
@@ -133,6 +135,24 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { 
+            boxShadow: "0 0 20px hsl(var(--primary) / 0.3)",
+            transform: "scale(1)"
+          },
+          "50%": { 
+            boxShadow: "0 0 40px hsl(var(--primary) / 0.5)",
+            transform: "scale(1.02)"
+          },
+        },
       },
 
       /* Animation Classes */
@@ -144,6 +164,9 @@ export default {
         "scale-in": "scale-in 0.4s ease-out forwards",
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "float": "float 4s ease-in-out infinite",
+        "bounce": "bounce 1s ease-in-out infinite",
+        "spin-slow": "spin-slow 8s linear infinite",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
       },
 
       /* Background Image */
