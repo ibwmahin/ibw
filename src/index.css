@@ -2,16 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+/* Google Fonts Import - Poppins & Inter */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
 /* 
  * ============================================
  * DESIGN SYSTEM - Video Editor Portfolio
  * ============================================
  * Color Palette: Dark cinematic with red accents
- * Typography: Oswald (headings), Inter (body)
+ * Typography: Poppins (headings), Inter (body)
  * Effects: Red glow, grid patterns, smooth animations
+ * 
+ * @author Abdulla Al Mahin (@ibwmahin)
  */
 
 @layer base {
@@ -113,10 +115,10 @@
     scroll-behavior: smooth;
   }
 
-  /* Custom Scrollbar - Hide default, add custom */
+  /* Custom Scrollbar - Styled */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -125,7 +127,7 @@
 
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--scrollbar-thumb));
-    border-radius: 4px;
+    border-radius: 3px;
     transition: background 0.3s ease;
   }
 
@@ -206,7 +208,6 @@
    */
   .section-title {
     @apply font-heading font-bold text-foreground tracking-tight;
-    font-style: italic;
   }
 
   /* 
@@ -240,11 +241,28 @@
     @apply bg-background/40 opacity-0 hover:opacity-100 transition-opacity duration-300;
   }
 
-  /* Software Icon Style */
+  /* Software Icon Style - Enhanced with glow */
   .software-icon {
-    @apply w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-lg overflow-hidden;
-    @apply transition-transform duration-300 hover:scale-110;
-    box-shadow: 0 4px 20px hsl(var(--glow-red) / 0.2);
+    @apply w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl overflow-hidden;
+    @apply transition-all duration-300 hover:scale-110;
+    background: hsl(var(--card));
+    box-shadow: 
+      0 4px 20px hsl(var(--glow-red) / 0.3),
+      0 0 40px hsl(var(--glow-red) / 0.15),
+      inset 0 1px 0 hsl(var(--foreground) / 0.1);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .software-icon:hover {
+    box-shadow: 
+      0 8px 30px hsl(var(--glow-red) / 0.5),
+      0 0 60px hsl(var(--glow-red) / 0.25),
+      inset 0 1px 0 hsl(var(--foreground) / 0.15);
+  }
+
+  .software-icon img {
+    @apply w-10 h-10 md:w-12 md:h-12 object-contain;
+    filter: drop-shadow(0 2px 4px hsl(var(--background) / 0.5));
   }
 
   /* Video Embed Container - Responsive */
@@ -336,6 +354,51 @@
   .tilt-card:hover {
     transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.02);
   }
+
+  /* Typewriter cursor */
+  .typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: hsl(var(--primary));
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Floating animation */
+  .float-animation {
+    animation: float-up-down 3s ease-in-out infinite;
+  }
+
+  @keyframes float-up-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Rotate animation */
+  .rotate-slow {
+    animation: rotate-slow 20s linear infinite;
+  }
+
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Scale pulse */
+  .scale-pulse {
+    animation: scale-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scale-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
 }
 
 @layer utilities {
@@ -412,4 +475,14 @@
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
   .stagger-5 { animation-delay: 0.5s; }
+
+  /* Interactive hover lift */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 10px 40px hsl(var(--primary) / 0.2);
+  }
 }

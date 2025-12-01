@@ -175,7 +175,8 @@ const AboutSection = () => {
               <div className="space-y-4">
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                   Hi, I'm <span className="text-foreground font-semibold">Abdulla Al Mahin</span>,
-                  a passionate <span className="text-foreground font-semibold">Video Editor</span> from Bangladesh.
+                  a passionate <span className="text-foreground font-semibold">Video Editor</span> and{" "}
+                  <span className="text-primary font-semibold">ex-Web Developer</span> from Bangladesh.
                   I specialize in creating engaging visual content that tells compelling stories.
                 </p>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
@@ -201,7 +202,7 @@ const AboutSection = () => {
                 {skills.map((skill, index) => (
                   <li
                     key={index}
-                    className="text-sm md:text-base text-muted-foreground flex items-center gap-2 group"
+                    className="text-sm md:text-base text-muted-foreground flex items-center gap-2 group hover-lift p-2 rounded-lg"
                   >
                     <span className="w-1.5 h-1.5 bg-primary rounded-full group-hover:scale-150 transition-transform" />
                     {skill}
@@ -223,7 +224,7 @@ const AboutSection = () => {
               </h2>
               <div className="space-y-6">
                 {experiences.map((exp, index) => (
-                  <div key={index} className="tilt-card p-4 rounded-lg bg-card/50 border border-border/50">
+                  <div key={index} className="tilt-card p-4 rounded-lg bg-card/50 border border-border/50 hover-lift">
                     <h4 className="text-foreground font-semibold text-sm md:text-base">
                       {exp.title}{" "}
                       <span className="font-normal text-muted-foreground">
