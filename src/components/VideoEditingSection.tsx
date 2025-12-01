@@ -3,6 +3,8 @@
  * 
  * Showcases video editing portfolio with before/after comparisons.
  * Features GSAP scroll animations and hover effects.
+ * 
+ * @author Abdulla Al Mahin (@ibwmahin)
  */
 
 import { useEffect, useRef } from "react";
@@ -19,30 +21,30 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
-    clientName: "Canal Burachos YT",
-    youtubeHandle: "@Burachos",
+    clientName: "YouTube Channel Project",
+    youtubeHandle: "@Creator",
     subscribers: "1.5M+",
     before: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80",
     after: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600&q=80",
-    description: "Edição completa de vídeos para o canal, incluindo motion graphics e correção de cor.",
+    description: "Complete video editing for the channel, including motion graphics and color correction.",
   },
   {
     id: 2,
-    clientName: "Canal RG Plays",
-    youtubeHandle: "@RGPlays",
+    clientName: "Gaming Channel",
+    youtubeHandle: "@Gamer",
     subscribers: "800K+",
     before: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80",
     after: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
-    description: "Edição de gameplays com efeitos visuais e transições dinâmicas.",
+    description: "Gameplay editing with visual effects and dynamic transitions.",
   },
   {
     id: 3,
-    clientName: "Daniel San Designs",
-    youtubeHandle: "@DanielSan",
+    clientName: "Design Tutorial Channel",
+    youtubeHandle: "@Designer",
     subscribers: "500K+",
     before: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&q=80",
     after: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80",
-    description: "Tutoriais de design com motion graphics avançados.",
+    description: "Design tutorials with advanced motion graphics.",
   },
 ];
 
@@ -51,10 +53,10 @@ const projects = [
  */
 const testimonial = {
   avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&q=80",
-  name: "João Pedro",
-  handle: "@joaopedro",
+  name: "John Smith",
+  handle: "@johnsmith",
   verified: true,
-  text: "Trabalho incrível! O Rafa transformou completamente a qualidade dos meus vídeos. Super recomendo para quem quer elevar o nível do canal.",
+  text: "Amazing work! Mahin completely transformed the quality of my videos. Highly recommend for anyone looking to elevate their channel's production value.",
   likes: "2.4K",
   retweets: "156",
 };
@@ -119,9 +121,9 @@ const VideoEditingSection = () => {
         {/* Section Title */}
         <div ref={titleRef} className="text-center mb-16">
           <h2 className="section-title text-5xl md:text-7xl lg:text-8xl">
-            Edições de Vídeo
+            Video Editing
           </h2>
-          <p className="text-muted-foreground text-lg mt-2">Video Editing</p>
+          <p className="text-muted-foreground text-lg mt-2">Featured Projects</p>
         </div>
 
         {/* Projects Grid */}
@@ -137,12 +139,12 @@ const VideoEditingSection = () => {
                 {/* Before */}
                 <div className="space-y-3">
                   <p className="text-muted-foreground text-sm font-medium">
-                    Antes
+                    Before
                   </p>
-                  <div className="comparison-card aspect-video relative group cursor-pointer overflow-hidden">
+                  <div className="comparison-card aspect-video relative group cursor-pointer overflow-hidden hover-lift">
                     <img
                       src={project.before}
-                      alt={`${project.clientName} - Antes`}
+                      alt={`${project.clientName} - Before`}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="play-overlay">
@@ -159,12 +161,12 @@ const VideoEditingSection = () => {
                 {/* After */}
                 <div className="space-y-3">
                   <p className="text-muted-foreground text-sm font-medium">
-                    Depois
+                    After
                   </p>
-                  <div className="comparison-card aspect-video relative group cursor-pointer overflow-hidden">
+                  <div className="comparison-card aspect-video relative group cursor-pointer overflow-hidden hover-lift">
                     <img
                       src={project.after}
-                      alt={`${project.clientName} - Depois`}
+                      alt={`${project.clientName} - After`}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="play-overlay">
@@ -187,7 +189,7 @@ const VideoEditingSection = () => {
               {/* Show testimonial after first project */}
               {index === 0 && (
                 <div className="max-w-xl mx-auto mt-12">
-                  <div className="bg-card border border-border rounded-xl p-6">
+                  <div className="bg-card border border-border rounded-xl p-6 hover-lift">
                     <div className="flex items-start gap-4">
                       <img
                         src={testimonial.avatar}

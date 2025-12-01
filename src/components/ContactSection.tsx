@@ -1,7 +1,7 @@
 /**
  * ContactSection Component
  * 
- * Final section with "Thank You!" message and social media links.
+ * Final section with contact form, "Thank You!" message and social links.
  * Features animated entrance and hover effects.
  * 
  * @author Abdulla Al Mahin (@ibwmahin)
@@ -21,6 +21,7 @@ import {
   faFacebook,
   faGithub
 } from "@fortawesome/free-brands-svg-icons";
+import ContactForm from "./ContactForm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,6 +62,7 @@ const ContactSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -76,6 +78,22 @@ const ContactSection = () => {
           ease: "elastic.out(1, 0.5)",
           scrollTrigger: {
             trigger: titleRef.current,
+            start: "top 85%",
+          },
+        }
+      );
+
+      // Form animation
+      gsap.fromTo(
+        formRef.current,
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: formRef.current,
             start: "top 85%",
           },
         }
@@ -132,66 +150,69 @@ const ContactSection = () => {
       <div className="absolute inset-0 red-glow-center opacity-30" />
 
       <div className="container relative z-10">
-        <div ref={contentRef} className="text-center space-y-8">
+        <div className="text-center space-y-8">
           {/* Main Title */}
           <h2 
             ref={titleRef}
-            className="font-heading text-7xl md:text-9xl lg:text-[10rem] font-bold text-foreground tracking-tight glow-text"
+            className="font-heading text-6xl md:text-8xl lg:text-9xl font-bold text-foreground tracking-tight glow-text"
           >
-            Thank You!
+            Let's Work Together
           </h2>
 
           {/* Subtitle */}
           <p className="text-muted-foreground text-xl md:text-2xl">
-            Let's work together
+            Have a project in mind? Get in touch!
           </p>
 
-          {/* Contact Links */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10 pt-8">
-            {socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-all duration-300 group magnetic-hover"
-                target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon
-                  icon={link.icon}
-                  className="text-xl text-primary group-hover:scale-125 transition-transform duration-300"
-                />
-                <span className="font-body text-sm md:text-base">
-                  {link.label}
-                </span>
-              </a>
-            ))}
+          {/* Contact Form */}
+          <div ref={formRef} className="pt-8">
+            <ContactForm />
           </div>
 
-          {/* Portfolio Links */}
-          <div ref={linksRef} className="flex justify-center gap-4 pt-8">
-            {portfolioLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-muted/50 hover:bg-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300 border border-border/50 hover:border-primary magnetic-hover"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.label}
-              >
-                <FontAwesomeIcon icon={link.icon} className="text-lg" />
-              </a>
-            ))}
+          {/* Or Divider */}
+          <div className="flex items-center gap-4 max-w-lg mx-auto pt-8">
+            <div className="flex-1 h-px bg-border" />
+            <span className="text-muted-foreground text-sm">or reach out directly</span>
+            <div className="flex-1 h-px bg-border" />
           </div>
 
-          {/* CTA Button */}
-          <div className="pt-8">
-            <a
-              href="mailto:ibwmahin@gmail.com"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 magnetic-hover border-glow"
-            >
-              <FontAwesomeIcon icon={faEnvelope} />
-              <span>Get In Touch</span>
-            </a>
+          <div ref={contentRef} className="space-y-8">
+            {/* Contact Links */}
+            <div className="flex flex-wrap justify-center gap-6 md:gap-10 pt-4">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-all duration-300 group magnetic-hover"
+                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon
+                    icon={link.icon}
+                    className="text-xl text-primary group-hover:scale-125 transition-transform duration-300"
+                  />
+                  <span className="font-body text-sm md:text-base">
+                    {link.label}
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {/* Portfolio Links */}
+            <div ref={linksRef} className="flex justify-center gap-4 pt-4">
+              {portfolioLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  className="w-12 h-12 flex items-center justify-center rounded-full bg-muted/50 hover:bg-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300 border border-border/50 hover:border-primary magnetic-hover"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                >
+                  <FontAwesomeIcon icon={link.icon} className="text-lg" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Footer */}

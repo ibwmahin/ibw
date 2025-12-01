@@ -6,7 +6,7 @@ import type { Config } from "tailwindcss";
  * 
  * Design System:
  * - Dark cinematic color palette
- * - Oswald for headings (bold, condensed)
+ * - Poppins for headings (modern, clean)
  * - Inter for body text
  * - Red accent with glow effects
  * - Custom animations for GSAP integration
@@ -34,7 +34,7 @@ export default {
     extend: {
       /* Typography - Google Fonts */
       fontFamily: {
-        heading: ["Oswald", "sans-serif"],
+        heading: ["Poppins", "sans-serif"],
         body: ["Inter", "sans-serif"],
       },
 
@@ -153,6 +153,18 @@ export default {
             transform: "scale(1.02)"
           },
         },
+        "slide-up": {
+          "0%": { transform: "translateY(100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "slide-down": {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "wiggle": {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
       },
 
       /* Animation Classes */
@@ -167,6 +179,9 @@ export default {
         "bounce": "bounce 1s ease-in-out infinite",
         "spin-slow": "spin-slow 8s linear infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "slide-up": "slide-up 0.5s ease-out",
+        "slide-down": "slide-down 0.5s ease-out",
+        "wiggle": "wiggle 0.5s ease-in-out infinite",
       },
 
       /* Background Image */
