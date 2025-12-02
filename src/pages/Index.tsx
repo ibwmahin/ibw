@@ -15,8 +15,10 @@ import PortfolioNav from "@/components/PortfolioNav";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import VideoEditingSection from "@/components/VideoEditingSection";
+import BentoSection from "@/components/BentoSection";
 import MotionGraphicsSection from "@/components/MotionGraphicsSection";
 import PromotionalBanner from "@/components/PromotionalBanner";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import AIBot from "@/components/AIBot";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -39,8 +41,10 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <VideoEditingSection />
+      <BentoSection />
       <MotionGraphicsSection />
       <PromotionalBanner />
+      <TestimonialsSection />
       <ContactSection />
       <AIBot />
       <ScrollToTop />
