@@ -14,9 +14,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faSpinner, faCheck, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 // EmailJS Configuration
-const EMAILJS_SERVICE_ID = "service_lyhmmox";
-const EMAILJS_TEMPLATE_ID = "template_2ag350j";
-const EMAILJS_PUBLIC_KEY = "wG8px5150C96d09F3";
+const EMAILJS_SERVICE_ID = "service_eohgabw";
+const EMAILJS_TEMPLATE_ID = "template_eu70og5";
+const EMAILJS_PUBLIC_KEY = "NW7I95EK5KUmpEvVa";
 
 interface FormData {
   name: string;
