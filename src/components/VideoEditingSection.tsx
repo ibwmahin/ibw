@@ -1,9 +1,9 @@
 /**
  * VideoEditingSection Component
- * 
+ *
  * Showcases video editing portfolio with YouTube embeds.
  * Features GSAP scroll animations and clickable video cards.
- * 
+ *
  * @author Abdulla Al Mahin (@ibwmahin)
  */
 
@@ -25,6 +25,7 @@ const projects = [
     channel: "@Creator",
     videoId: "dQw4w9WgXcQ", // Replace with actual video ID
     category: "Long-form Content",
+    size: "md:col-span-2 md:row-span-2",
   },
   {
     id: 2,
@@ -32,6 +33,7 @@ const projects = [
     channel: "@Gamer",
     videoId: "dQw4w9WgXcQ", // Replace with actual video ID
     category: "Gaming",
+    size: "md:col-span-1 md:row-span-1",
   },
   {
     id: 3,
@@ -39,6 +41,7 @@ const projects = [
     channel: "@Designer",
     videoId: "dQw4w9WgXcQ", // Replace with actual video ID
     category: "Educational",
+    size: "md:col-span-1 md:row-span-1",
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ const projects = [
     channel: "@Vlogger",
     videoId: "dQw4w9WgXcQ", // Replace with actual video ID
     category: "Lifestyle",
+    size: "md:col-span-2 md:row-span-1",
   },
 ];
 
@@ -108,24 +112,23 @@ const VideoEditingSection = () => {
           <h2 className="section-title text-5xl md:text-7xl lg:text-8xl">
             Video Editing
           </h2>
-          <p className="text-muted-foreground text-lg mt-2">Featured Projects</p>
+          <p className="text-muted-foreground text-lg mt-2">
+            Featured Projects
+          </p>
         </div>
 
         {/* Video Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-[300px]"
         >
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group relative rounded-xl overflow-hidden magnetic-hover"
+              className={`${project.size} group relative rounded-xl overflow-hidden magnetic-hover`}
             >
               {/* Video Embed */}
-              <VideoEmbed
-                videoId={project.videoId}
-                title={project.title}
-              />
+              <VideoEmbed videoId={project.videoId} title={project.title} />
 
               {/* Content Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/95 via-background/70 to-transparent pointer-events-none">
@@ -157,7 +160,9 @@ const VideoEditingSection = () => {
             className="inline-flex items-center gap-2 text-primary hover:text-foreground transition-colors duration-300 font-medium group"
           >
             <span>View All on YouTube</span>
-            <span className="text-xl group-hover:translate-x-1 transition-transform duration-300">→</span>
+            <span className="text-xl group-hover:translate-x-1 transition-transform duration-300">
+              →
+            </span>
           </a>
         </div>
       </div>

@@ -163,7 +163,7 @@ const ContactSection = () => {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors group"
+                    className="flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors group hover-lift p-2 rounded-lg"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

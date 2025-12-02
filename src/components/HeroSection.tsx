@@ -49,6 +49,9 @@ const FloatingParticles = ({ count = 25 }) => (
   </div>
 );
 
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -77,6 +80,12 @@ const HeroSection = () => {
           { y: 40, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.8 },
           "-=0.6"
+        )
+        .fromTo(
+          ".cta-button",
+          { y: 20, opacity: 0, scale: 0.9 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.2 },
+          "-=0.4"
         )
         .fromTo(
           scrollRef.current,
@@ -126,22 +135,35 @@ const HeroSection = () => {
           className="text-primary font-body text-sm md:text-base font-medium tracking-widest uppercase mb-4 flex items-center gap-3"
         >
           <span className="w-8 h-[2px] bg-primary" />
-          @ibwmahin
+          Abdulla Al Mahin
         </p>
 
         <h1
           ref={titleRef}
-          className="font-heading text-7xl md:text-9xl lg:text-[12rem] font-bold text-foreground leading-none tracking-tight glow-text"
+          className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-foreground leading-tight tracking-tight glow-text"
         >
-          Portfolio
+          Video Editor & <br /> Motion Designer
         </h1>
         <p
           ref={subtitleRef}
-          className="font-body text-lg md:text-xl text-muted-foreground mt-4 flex items-center gap-3"
+          className="font-body text-lg md:text-xl text-muted-foreground mt-6 max-w-xl"
         >
-          <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-          Video Editor & Motion Designer
+          I bring stories to life through captivating visuals and seamless edits, 
+          turning creative visions into dynamic realities.
         </p>
+        <div className="mt-8 flex items-center gap-4">
+          <a href="#video-editing" className="cta-button">
+            <Button size="lg" className="group">
+              View My Work
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </a>
+          <a href="#contact" className="cta-button">
+            <Button size="lg" variant="outline">
+              Get in Touch
+            </Button>
+          </a>
+        </div>
       </div>
 
       <div

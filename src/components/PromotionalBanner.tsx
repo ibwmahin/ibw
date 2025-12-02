@@ -68,22 +68,25 @@ const PromotionalBanner = () => {
         }
       );
 
-      // Cards animation with 3D rotation
+      // Cards animation with 3D rotation and scroll scrubbing
       const cards = cardsRef.current?.children || [];
       gsap.fromTo(
         cards,
-        { y: 80, opacity: 0, rotateX: 20, scale: 0.9 },
+        { y: 100, opacity: 0, rotateX: 30, rotateY: -10, scale: 0.9 },
         {
           y: 0,
           opacity: 1,
           rotateX: 0,
+          rotateY: 0,
           scale: 1,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 1,
+          stagger: 0.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: cardsRef.current,
-            start: "top 85%",
+            start: "top 90%",
+            end: "top 40%",
+            scrub: 1.5,
           },
         }
       );

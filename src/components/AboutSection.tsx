@@ -1,9 +1,9 @@
 /**
  * AboutSection Component
- * 
+ *
  * Displays personal information, bio, skills, and software icons.
  * Uses GSAP ScrollTrigger for reveal animations.
- * 
+ *
  * @author Abdulla Al Mahin (@ibwmahin)
  */
 
@@ -37,6 +37,7 @@ const softwareList = [
 const skills = [
   "Video Editing",
   "Motion Graphics",
+  "Photo Editing",
   "Color Grading",
   "Sound Design",
   "Visual Effects",
@@ -174,21 +175,37 @@ const AboutSection = () => {
 
               <div className="space-y-4">
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  Hi, I'm <span className="text-foreground font-semibold">Abdulla Al Mahin</span>,
-                  a passionate <span className="text-foreground font-semibold">Video Editor</span> and{" "}
-                  <span className="text-primary font-semibold">ex-Web Developer</span> from Bangladesh.
-                  I specialize in creating engaging visual content that tells compelling stories.
+                  Hi, I'm{" "}
+                  <span className="text-foreground font-semibold">
+                    Abdulla Al Mahin
+                  </span>
+                  , a passionate{" "}
+                  <span className="text-foreground font-semibold">
+                    Video Editor
+                  </span>{" "}
+                  and{" "}
+                  <a
+                    href="https://ibwmahin.github.io"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline"
+                  >
+                    ex-Web Developer
+                  </a>{" "}
+                  from Bangladesh. I specialize in creating engaging visual
+                  content that tells compelling stories.
                 </p>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  With expertise in Adobe Premiere Pro, After Effects, and DaVinci Resolve,
-                  I bring creative visions to life through{" "}
+                  With expertise in Adobe Premiere Pro, After Effects, and
+                  DaVinci Resolve, I bring creative visions to life through{" "}
                   <span className="text-primary font-semibold">
-                    professional video editing, motion graphics, and color grading.
+                    professional video editing, motion graphics, and color
+                    grading.
                   </span>
                 </p>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  I've worked with content creators, businesses, and brands to deliver
-                  high-quality video content that stands out.
+                  I've worked with content creators, businesses, and brands to
+                  deliver high-quality video content that stands out.
                 </p>
               </div>
             </div>
@@ -224,7 +241,10 @@ const AboutSection = () => {
               </h2>
               <div className="space-y-6">
                 {experiences.map((exp, index) => (
-                  <div key={index} className="tilt-card p-4 rounded-lg bg-card/50 border border-border/50 hover-lift">
+                  <div
+                    key={index}
+                    className="tilt-card p-4 rounded-lg bg-card/50 border border-border/50 hover-lift"
+                  >
                     <h4 className="text-foreground font-semibold text-sm md:text-base">
                       {exp.title}{" "}
                       <span className="font-normal text-muted-foreground">
@@ -262,8 +282,8 @@ const AboutSection = () => {
                     className="software-icon"
                     title={software.name}
                   >
-                    <img 
-                      src={software.icon} 
+                    <img
+                      src={software.icon}
                       alt={software.name}
                       className="w-full h-full object-contain"
                     />

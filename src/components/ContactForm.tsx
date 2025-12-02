@@ -1,17 +1,11 @@
-/**
- * ContactForm Component
- * 
- * Minimal contact form integrated with EmailJS.
- * Features validation and animated feedback.
- * 
- * @author Abdulla Al Mahin (@ibwmahin)
- */
-
 import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import gsap from "gsap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faSpinner, faCheck, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 // EmailJS Configuration
 const EMAILJS_SERVICE_ID = "service_eohgabw";
@@ -141,16 +135,13 @@ const ContactForm = () => {
           <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-1">
             Name <span className="text-primary">*</span>
           </label>
-          <input
-            type="text"
+          <Input
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-3 bg-card border ${
-              errors.name ? "border-destructive" : "border-border"
-            } rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300`}
             placeholder="Your name"
+            className={errors.name ? "border-destructive" : ""}
           />
           {errors.name && (
             <p className="text-destructive text-xs mt-1 flex items-center gap-1">
@@ -165,16 +156,14 @@ const ContactForm = () => {
           <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-1">
             Email <span className="text-primary">*</span>
           </label>
-          <input
+          <Input
             type="email"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 bg-card border ${
-              errors.email ? "border-destructive" : "border-border"
-            } rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300`}
             placeholder="your@email.com"
+            className={errors.email ? "border-destructive" : ""}
           />
           {errors.email && (
             <p className="text-destructive text-xs mt-1 flex items-center gap-1">
@@ -189,13 +178,11 @@ const ContactForm = () => {
           <label htmlFor="subject" className="block text-sm font-medium text-muted-foreground mb-1">
             Subject <span className="text-muted-foreground/50">(optional)</span>
           </label>
-          <input
-            type="text"
+          <Input
             id="subject"
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
             placeholder="Project subject"
           />
         </div>
@@ -205,13 +192,12 @@ const ContactForm = () => {
           <label htmlFor="phone" className="block text-sm font-medium text-muted-foreground mb-1">
             Phone <span className="text-muted-foreground/50">(optional)</span>
           </label>
-          <input
+          <Input
             type="tel"
             id="phone"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
             placeholder="+880 1234567890"
           />
         </div>
@@ -221,16 +207,14 @@ const ContactForm = () => {
           <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-1">
             Project Details <span className="text-primary">*</span>
           </label>
-          <textarea
+          <Textarea
             id="message"
             name="message"
             value={formData.message}
             onChange={handleChange}
             rows={4}
-            className={`w-full px-4 py-3 bg-card border ${
-              errors.message ? "border-destructive" : "border-border"
-            } rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none`}
             placeholder="Tell me about your project..."
+            className={`resize-none ${errors.message ? "border-destructive" : ""}`}
           />
           {errors.message && (
             <p className="text-destructive text-xs mt-1 flex items-center gap-1">
@@ -241,39 +225,39 @@ const ContactForm = () => {
         </div>
 
         {/* Submit Button */}
-        <button
+        <Button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full py-4 px-6 rounded-lg font-semibold text-primary-foreground transition-all duration-300 flex items-center justify-center gap-2 ${
+          className={`w-full ${
             submitStatus === "success"
               ? "bg-green-600 hover:bg-green-700"
               : submitStatus === "error"
               ? "bg-destructive hover:bg-destructive/90"
-              : "bg-primary hover:bg-primary/90"
-          } ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover-lift"}`}
+              : ""
+          }`}
         >
           {isSubmitting ? (
             <>
-              <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+              <FontAwesomeIcon icon={faSpinner} className="animate-spin mr-2" />
               Sending...
             </>
           ) : submitStatus === "success" ? (
             <>
-              <FontAwesomeIcon icon={faCheck} />
+              <FontAwesomeIcon icon={faCheck} className="mr-2" />
               Message Sent!
             </>
           ) : submitStatus === "error" ? (
             <>
-              <FontAwesomeIcon icon={faExclamationCircle} />
+              <FontAwesomeIcon icon={faExclamationCircle} className="mr-2" />
               Failed to Send
             </>
           ) : (
             <>
-              <FontAwesomeIcon icon={faPaperPlane} />
+              <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
               Send Message
             </>
           )}
-        </button>
+        </Button>
 
         {/* Status Messages */}
         {submitStatus === "success" && (

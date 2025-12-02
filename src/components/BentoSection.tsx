@@ -15,7 +15,7 @@ import {
   faClock,
   faFire,
   faGlobe,
-  faBolt,
+  faCamera,
   faAward,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
@@ -39,13 +39,13 @@ const bentoItems = [
     description:
       "I work with you, offering unlimited revisions until you are completely happy with the final result.",
     gradient: "from-amber-500/20 to-amber-500/5",
-    size: "md:col-span-2 md:row-span-2",
+    size: "md:col-span-1 md:row-span-1",
   },
   {
     id: 3,
     icon: faGlobe,
     title: "Global Clients",
-    description: "Working with creators worldwide",
+    description: "Working with creators worldwide.",
     gradient: "from-blue-500/20 to-blue-500/5",
     size: "md:col-span-1 md:row-span-1",
   },
@@ -53,7 +53,7 @@ const bentoItems = [
     id: 4,
     icon: faClock,
     title: "Fast Turnaround",
-    description: "Quick delivery without compromising quality",
+    description: "Quick delivery without compromising quality.",
     gradient: "from-primary/20 to-primary/5",
     size: "md:col-span-1 md:row-span-1",
   },
@@ -61,11 +61,87 @@ const bentoItems = [
     id: 5,
     icon: faUsers,
     title: "30+ Clients",
-    description: "Trusted by content creators",
+    description: "Trusted by content creators.",
     gradient: "from-pink-500/20 to-pink-500/5",
     size: "md:col-span-1 md:row-span-1",
   },
+  {
+    id: 6,
+    icon: faCamera,
+    title: "Photo Editing",
+    description: "High-end photo retouching and manipulation.",
+    gradient: "from-purple-500/20 to-purple-500/5",
+    size: "md:col-span-1 md:row-span-1",
+  },
 ];
+
+const BentoCard = ({ item }: { item: (typeof bentoItems)[0] }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const timeline = useRef<gsap.core.Timeline>();
+
+  useEffect(() => {
+    timeline.current = gsap.timeline({ paused: true });
+
+    if (cardRef.current) {
+      const icon = cardRef.current.querySelector(".bento-icon");
+      const orb = cardRef.current.querySelector(".bento-orb");
+
+      timeline.current
+        .to(cardRef.current, {
+          scale: 1.02,
+          rotateX: 5,
+          rotateY: -5,
+          perspective: 1000,
+          duration: 0.5,
+          ease: "power3.out",
+        })
+        .to(icon, { scale: 1.15, rotate: -5, duration: 0.4, ease: "power3.out" }, "-=0.4")
+        .to(orb, { scale: 1.75, duration: 0.5, ease: "power3.out" }, "-=0.4");
+    }
+  }, []);
+
+  const handleMouseEnter = () => {
+    timeline.current?.play();
+  };
+
+  const handleMouseLeave = () => {
+    timeline.current?.reverse();
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`${item.size} relative p-6 rounded-2xl overflow-hidden cursor-pointer
+        bg-gradient-to-br ${item.gradient}
+        border border-border/30 hover:border-primary/50
+        transition-colors duration-300 hover-lift`}
+    >
+      {/* Icon */}
+      <div className="bento-icon w-12 h-12 bg-background/30 rounded-xl flex items-center justify-center mb-4">
+        <FontAwesomeIcon
+          icon={item.icon}
+          className="text-2xl text-foreground"
+        />
+      </div>
+
+      {/* Content */}
+      <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-2">
+        {item.title}
+      </h3>
+      <p className="text-muted-foreground text-sm leading-relaxed">
+        {item.description}
+      </p>
+
+      {/* Decorative gradient orb */}
+      <div className="bento-orb absolute -bottom-10 -right-10 w-32 h-32 bg-foreground/5 rounded-full blur-2xl" />
+
+      {/* Shimmer effect */}
+      <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 shimmer pointer-events-none" />
+    </div>
+  );
+};
 
 const BentoSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -78,35 +154,21 @@ const BentoSection = () => {
       ) as HTMLElement[];
       if (items.length === 0) return;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 85%",
-        },
-      });
-
-      // Animate the large central item first
-      const centerItem = items[1];
-      tl.fromTo(
-        centerItem,
+      gsap.fromTo(
+        items,
         { y: 60, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
-      );
-
-      // Animate the surrounding items in a specific, more dynamic order
-      const surroundingItems = [items[0], items[2], items[4], items[5]];
-      tl.fromTo(
-        surroundingItems,
-        { y: 40, opacity: 0, scale: 0.95 },
         {
           y: 0,
           opacity: 1,
           scale: 1,
-          duration: 0.6,
+          duration: 0.8,
           stagger: 0.15,
-          ease: "power2.out",
-        },
-        "-=0.5" // Overlap with the end of the previous animation
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 85%",
+          },
+        }
       );
     }, sectionRef);
 
@@ -122,38 +184,10 @@ const BentoSection = () => {
         {/* Bento Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[180px]"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]"
         >
           {bentoItems.map((item) => (
-            <div
-              key={item.id}
-              className={`${item.size} group relative p-6 rounded-2xl overflow-hidden cursor-pointer
-                bg-gradient-to-br ${item.gradient}
-                border border-border/30 hover:border-primary/50
-                transition-all duration-500 hover-lift`}
-            >
-              {/* Icon */}
-              <div className="w-12 h-12 bg-background/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                <FontAwesomeIcon
-                  icon={item.icon}
-                  className="text-2xl text-foreground"
-                />
-              </div>
-
-              {/* Content */}
-              <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-2">
-                {item.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {item.description}
-              </p>
-
-              {/* Decorative gradient orb */}
-              <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-foreground/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 shimmer pointer-events-none" />
-            </div>
+            <BentoCard key={item.id} item={item} />
           ))}
         </div>
       </div>

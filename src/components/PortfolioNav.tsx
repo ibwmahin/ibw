@@ -1,9 +1,9 @@
 /**
  * PortfolioNav Component
- * 
+ *
  * Minimal navigation with smooth scroll to sections.
  * Fixed position with glass morphism effect.
- * 
+ *
  * @author Abdulla Al Mahin (@ibwmahin)
  */
 
@@ -56,7 +56,10 @@ const PortfolioNav = () => {
     }
   }, [isMobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
 
@@ -75,9 +78,11 @@ const PortfolioNav = () => {
       <nav
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500
-          ${isScrolled 
-            ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-background/20" 
-            : "bg-transparent"}`}
+          ${
+            isScrolled
+              ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-background/20"
+              : "bg-transparent"
+          }`}
       >
         <div className="container py-4">
           <div className="flex items-center justify-between">
@@ -87,13 +92,11 @@ const PortfolioNav = () => {
               onClick={(e) => handleNavClick(e, "#")}
               className="flex items-center gap-3 group"
             >
-              <div 
+              <div
                 ref={logoRef}
-                className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+                className="w-10 h-10  rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
               >
-                <span className="font-heading font-bold text-primary-foreground text-sm">
-                  AM
-                </span>
+                <img src="/favicon.png" alt="logo" className="w-8 h-8" />
               </div>
               <div className="hidden sm:block">
                 <span className="font-heading font-semibold text-foreground block leading-tight">
@@ -110,7 +113,7 @@ const PortfolioNav = () => {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="relative text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium group"
+                  className="relative text-muted-foreground hover:text-foreground transition-colors duration-300 text-base font-semibold group"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {link.label}
@@ -125,8 +128,8 @@ const PortfolioNav = () => {
               className="md:hidden w-10 h-10 flex items-center justify-center text-foreground rounded-lg hover:bg-muted transition-colors"
               aria-label="Toggle menu"
             >
-              <FontAwesomeIcon 
-                icon={isMobileMenuOpen ? faTimes : faBars} 
+              <FontAwesomeIcon
+                icon={isMobileMenuOpen ? faTimes : faBars}
                 className="text-xl"
               />
             </button>
@@ -137,7 +140,11 @@ const PortfolioNav = () => {
       {/* Mobile Menu */}
       <div
         className={`fixed inset-0 z-40 bg-background/98 backdrop-blur-xl transition-all duration-500 md:hidden
-          ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
+          ${
+            isMobileMenuOpen
+              ? "opacity-100 visible"
+              : "opacity-0 invisible pointer-events-none"
+          }`}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8 p-8">
           {navLinks.map((link) => (
@@ -150,7 +157,7 @@ const PortfolioNav = () => {
               {link.label}
             </a>
           ))}
-          
+
           {/* Social links in mobile menu */}
           <div className="flex items-center gap-4 mt-8 pt-8 border-t border-border/50">
             <span className="text-muted-foreground text-sm">@ibwmahin</span>
