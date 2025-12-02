@@ -1,8 +1,8 @@
 /**
  * ContactSection Component
  * 
- * Final section with contact form, "Thank You!" message and social links.
- * Features animated entrance and hover effects.
+ * Modern minimal contact section with form and social links.
+ * Features clean design that blends with portfolio aesthetic.
  * 
  * @author Abdulla Al Mahin (@ibwmahin)
  */
@@ -25,31 +25,9 @@ import ContactForm from "./ContactForm";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Social media links data - All @ibwmahin
- */
 const socialLinks = [
-  {
-    icon: faEnvelope,
-    label: "ibwmahin@gmail.com",
-    href: "mailto:ibwmahin@gmail.com",
-  },
-  {
-    icon: faInstagram,
-    label: "@ibwmahin",
-    href: "https://instagram.com/ibwmahin",
-  },
-  {
-    icon: faTwitter,
-    label: "@ibwmahin",
-    href: "https://twitter.com/ibwmahin",
-  },
-];
-
-/**
- * Portfolio/Social links
- */
-const portfolioLinks = [
+  { icon: faInstagram, href: "https://instagram.com/ibwmahin", label: "Instagram" },
+  { icon: faTwitter, href: "https://twitter.com/ibwmahin", label: "Twitter" },
   { icon: faYoutube, href: "https://youtube.com/@ibwmahin", label: "YouTube" },
   { icon: faLinkedin, href: "https://linkedin.com/in/ibwmahin", label: "LinkedIn" },
   { icon: faTiktok, href: "https://tiktok.com/@ibwmahin", label: "TikTok" },
@@ -59,23 +37,21 @@ const portfolioLinks = [
 
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation with bounce
+      // Title animation
       gsap.fromTo(
         titleRef.current,
-        { y: 100, opacity: 0, scale: 0.5 },
+        { y: 80, opacity: 0, scale: 0.9 },
         {
           y: 0,
           opacity: 1,
           scale: 1,
-          duration: 1.2,
-          ease: "elastic.out(1, 0.5)",
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: titleRef.current,
             start: "top 85%",
@@ -83,53 +59,18 @@ const ContactSection = () => {
         }
       );
 
-      // Form animation
+      // Content animation
       gsap.fromTo(
-        formRef.current,
+        contentRef.current,
         { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: formRef.current,
-            start: "top 85%",
-          },
-        }
-      );
-
-      // Content stagger animation
-      const contentElements = contentRef.current?.children || [];
-      gsap.fromTo(
-        contentElements,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
+          delay: 0.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: contentRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-
-      // Links animation with scale
-      const linkElements = linksRef.current?.children || [];
-      gsap.fromTo(
-        linkElements,
-        { scale: 0, rotation: -180 },
-        {
-          scale: 1,
-          rotation: 0,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: linksRef.current,
             start: "top 85%",
           },
         }
@@ -146,92 +87,89 @@ const ContactSection = () => {
       className="relative py-32 overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 red-glow-bottom" />
-      <div className="absolute inset-0 red-glow-center opacity-30" />
+      <div className="absolute inset-0 red-glow-center opacity-20" />
 
-      <div className="container relative z-10">
-        <div className="text-center space-y-8">
-          {/* Main Title */}
+      <div className="container relative z-10 max-w-4xl mx-auto">
+        {/* Title */}
+        <div className="text-center mb-16">
           <h2 
             ref={titleRef}
-            className="font-heading text-6xl md:text-8xl lg:text-9xl font-bold text-foreground tracking-tight glow-text"
+            className="font-heading text-6xl md:text-8xl lg:text-9xl font-bold text-foreground tracking-tight mb-4"
           >
-            Let's Work Together
+            Let's Talk
           </h2>
-
-          {/* Subtitle */}
-          <p className="text-muted-foreground text-xl md:text-2xl">
-            Have a project in mind? Get in touch!
+          <p className="text-muted-foreground text-lg md:text-xl">
+            Ready to elevate your content? Drop me a message.
           </p>
+        </div>
 
-          {/* Contact Form */}
-          <div ref={formRef} className="pt-8">
+        {/* Content Grid */}
+        <div ref={contentRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Left: Contact Info */}
+          <div className="space-y-8">
+            {/* Email */}
+            <div>
+              <h3 className="font-heading text-2xl font-bold text-foreground mb-4">
+                Get in Touch
+              </h3>
+              <a
+                href="mailto:ibwmahin@gmail.com"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+              >
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                  <FontAwesomeIcon icon={faEnvelope} className="text-primary" />
+                </div>
+                <span className="text-sm md:text-base">ibwmahin@gmail.com</span>
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div>
+              <h3 className="font-heading text-2xl font-bold text-foreground mb-4">
+                Follow Me
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    className="w-10 h-10 flex items-center justify-center rounded-lg bg-muted/30 hover:bg-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300 border border-border/30 hover:border-primary magnetic-hover"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                  >
+                    <FontAwesomeIcon icon={link.icon} className="text-base" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Info */}
+            <div className="pt-4 border-t border-border/30">
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  Available for projects
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full" />
+                  Based in Bangladesh
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Contact Form */}
+          <div className="bg-card/30 border border-border/30 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
             <ContactForm />
           </div>
+        </div>
 
-          {/* Or Divider */}
-          <div className="flex items-center gap-4 max-w-lg mx-auto pt-8">
-            <div className="flex-1 h-px bg-border" />
-            <span className="text-muted-foreground text-sm">or reach out directly</span>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-
-          <div ref={contentRef} className="space-y-8">
-            {/* Contact Links */}
-            <div className="flex flex-wrap justify-center gap-6 md:gap-10 pt-4">
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-all duration-300 group magnetic-hover"
-                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                  rel="noopener noreferrer"
-                >
-                  <FontAwesomeIcon
-                    icon={link.icon}
-                    className="text-xl text-primary group-hover:scale-125 transition-transform duration-300"
-                  />
-                  <span className="font-body text-sm md:text-base">
-                    {link.label}
-                  </span>
-                </a>
-              ))}
-            </div>
-
-            {/* Portfolio Links */}
-            <div ref={linksRef} className="flex justify-center gap-4 pt-4">
-              {portfolioLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="w-12 h-12 flex items-center justify-center rounded-full bg-muted/50 hover:bg-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300 border border-border/50 hover:border-primary magnetic-hover"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                >
-                  <FontAwesomeIcon icon={link.icon} className="text-lg" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="pt-16 border-t border-border/50 mt-16">
-            <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center pulse-ring">
-                <span className="font-heading font-bold text-primary-foreground text-sm">
-                  AM
-                </span>
-              </div>
-              <span>Abdulla Al Mahin | Video Editor</span>
-            </div>
-            <p className="text-muted-foreground/60 text-xs mt-4">
-              © {new Date().getFullYear()} Abdulla Al Mahin (@ibwmahin). All rights reserved.
-            </p>
-            <p className="text-muted-foreground/40 text-xs mt-2">
-              Based in Bangladesh 🇧🇩
-            </p>
-          </div>
+        {/* Footer */}
+        <div className="text-center mt-20 pt-12 border-t border-border/20">
+          <p className="text-muted-foreground/60 text-sm">
+            © {new Date().getFullYear()} Abdulla Al Mahin (@ibwmahin). All rights reserved.
+          </p>
         </div>
       </div>
     </section>
