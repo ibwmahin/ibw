@@ -1,9 +1,9 @@
 /**
  * LoadingScreen Component
- * 
+ *
  * Fast, polished loading screen with orbital favicon animation.
  * Minimal loading time with smooth transitions.
- * 
+ *
  * @author Abdulla Al Mahin (@ibwmahin)
  */
 
@@ -15,10 +15,10 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   useEffect(() => {
     // Faster progress simulation
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 100);
+          setTimeout(onComplete, 700);
           return 100;
         }
         return prev + 10;
@@ -34,28 +34,26 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       <div className="relative w-40 h-40">
         {/* Orbital path */}
         <div className="absolute inset-0 rounded-full border border-border/20" />
-        
+
         {/* Center logo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16">
-          <img 
-            src="/favicon.png" 
-            alt="Loading" 
+          <img
+            src="/favicon.png"
+            alt="Loading"
             className="w-full h-full object-contain drop-shadow-[0_0_15px_hsl(var(--primary)/0.5)]"
           />
         </div>
-        
+
         {/* Orbiting ball */}
         <div className="absolute inset-0 animate-orbit">
-          <div 
-            className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]"
-          />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]" />
         </div>
       </div>
 
       {/* Progress bar */}
       <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-48">
         <div className="h-0.5 bg-border/30 rounded-full overflow-hidden">
-          <div 
+          <div
             className="h-full bg-primary transition-all duration-100 ease-out"
             style={{ width: `${progress}%` }}
           />
