@@ -77,7 +77,7 @@ const ScrollToTop = () => {
     <button
       ref={buttonRef}
       onClick={scrollToTop}
-      className="fixed bottom-6 right-24 w-12 h-12 rounded-full bg-secondary text-foreground flex items-center justify-center z-40 hover:bg-primary hover:text-primary-foreground transition-colors duration-300 border border-border/50 hover:border-primary"
+      className="fixed bottom-6 right-6 md:right-24 w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary text-foreground flex items-center justify-center z-40 hover:bg-primary hover:text-primary-foreground transition-colors duration-300 border border-border/50 hover:border-primary"
       style={{
         boxShadow: "0 0 20px hsl(var(--background) / 0.5)",
         opacity: 0,
