@@ -401,6 +401,21 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
     }
+
+    /* Orbital animation for loading screen */
+    .animate-orbit {
+      animation: orbit 1.2s linear infinite;
+      transform-origin: 50% 50%;
+    }
+
+    @keyframes orbit {
+      0% {
+        transform: rotate(0deg) translateX(40px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translateX(40px) rotate(-360deg);
+      }
+    }
   }
   
   @layer utilities {

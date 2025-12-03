@@ -117,15 +117,19 @@ const VideoEditingSection = () => {
           </p>
         </div>
 
-        {/* Video Grid */}
+        {/* Video Grid - Balanced Desktop Layout */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-[300px]"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div
               key={project.id}
-              className={`${project.size} group relative rounded-xl overflow-hidden magnetic-hover`}
+              className={`group relative rounded-xl overflow-hidden magnetic-hover ${
+                index === 0 ? 'md:col-span-2 md:row-span-2 aspect-video md:aspect-auto md:h-[500px]' : 
+                index === 3 ? 'md:col-span-2 aspect-video' : 
+                'aspect-video'
+              }`}
             >
               {/* Video Embed */}
               <VideoEmbed videoId={project.videoId} title={project.title} />

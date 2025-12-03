@@ -7,10 +7,11 @@
  * @author Abdulla Al Mahin (@ibwmahin)
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import LoadingScreen from "@/components/LoadingScreen";
 import PortfolioNav from "@/components/PortfolioNav";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -26,6 +27,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const mouseGlowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -51,11 +53,15 @@ const Index = () => {
     };
   }, []);
 
+  if (isLoading) {
+    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+  }
+
   return (
     <main className="relative min-h-screen bg-background overflow-x-hidden">
       <div
         ref={mouseGlowRef}
-        className="pointer-events-none fixed -top-1/2 -left-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none fixed -top-1/2 -left-1/2 w-64 h-64 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"
       />
       <div className="grid-pattern-fixed" />
       <PortfolioNav />
