@@ -28,30 +28,41 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(true);
   const mouseGlowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
     document.documentElement.style.scrollBehavior = "smooth";
     ScrollTrigger.refresh();
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  // Mouse glow effect - desktop only
+  useEffect(() => {
+    if (isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (mouseGlowRef.current) {
         gsap.to(mouseGlowRef.current, {
           x: e.clientX,
           y: e.clientY,
-          duration: 0.6,
-          ease: "power3.out",
+          duration: 0.8,
+          ease: "power2.out",
         });
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [isMobile]);
 
   if (isLoading) {
     return <LoadingScreen onComplete={() => setIsLoading(false)} />;
@@ -59,10 +70,12 @@ const Index = () => {
 
   return (
     <main className="relative min-h-screen bg-background overflow-x-hidden">
-      <div
-        ref={mouseGlowRef}
-        className="pointer-events-none fixed -top-1/2 -left-1/2 w-64 h-64 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"
-      />
+      {!isMobile && (
+        <div
+          ref={mouseGlowRef}
+          className="pointer-events-none fixed -top-1/2 -left-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2 will-change-transform"
+        />
+      )}
       <div className="grid-pattern-fixed" />
       <PortfolioNav />
       <HeroSection />
