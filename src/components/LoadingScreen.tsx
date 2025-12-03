@@ -13,17 +13,17 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Fast progress simulation
+    // Faster progress simulation
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 200);
+          setTimeout(onComplete, 100);
           return 100;
         }
-        return prev + 5;
+        return prev + 10;
       });
-    }, 30);
+    }, 25);
 
     return () => clearInterval(interval);
   }, [onComplete]);
