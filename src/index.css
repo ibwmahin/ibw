@@ -404,17 +404,12 @@
 
     /* Orbital animation for loading screen */
     .animate-orbit {
-      animation: orbit 1.2s linear infinite;
-      transform-origin: 50% 50%;
+      animation: orbit 1.5s linear infinite;
     }
 
     @keyframes orbit {
-      0% {
-        transform: rotate(0deg) translateX(40px) rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg) translateX(40px) rotate(-360deg);
-      }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
   }
   

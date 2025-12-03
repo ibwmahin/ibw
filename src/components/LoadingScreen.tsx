@@ -47,8 +47,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
         {/* Orbiting ball */}
         <div className="absolute inset-0 animate-orbit">
           <div 
-            className="absolute w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]"
-            style={{ top: '0', left: '50%', marginLeft: '-6px', marginTop: '-6px' }}
+            className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]"
           />
         </div>
       </div>
